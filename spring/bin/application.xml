@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	<!-- 开启IOC扫描
+	base-package:项目根目录 
+	 -->
+	<context:component-scan base-package="com.myspring.demo"></context:component-scan>
+
+	<!-- 
+		创建一个Bean
+		class:当前类的包路径
+		id:唯一标识
+	 -->
+		<!-- 为当前对象中的属性赋值的方法
+			name:类中属性的名字
+			value:为属性赋的值
+		 -->
+	<bean id="helloWorld" class="com.myspring.demo.HelloWorld">
+		<property name="name" value="Spring"></property>
+	</bean>
+	<!-- 为日历类创建Bean -->
+	<!-- 构造方法 -->
+	<bean id="calendar" class="java.util.GregorianCalendar"></bean>
+	<!-- 采用静态工厂类的方式创建对象 -->
+	<bean id="calendar1" class="java.util.Calendar" factory-method="getInstance"></bean>
+	<!-- 采用工厂对象的方法创建对象 -->
+	<bean id="date" factory-bean="calendar1" factory-method="getTime"></bean>
+	
+	<!-- 通过setName()为属性赋值
+		1.创建对象
+		2.为属性赋值
+		
+		<bean id="car" class="com.myspring.demo.Car">
+	 	<constructor-arg index="0" value="东风两厢"></constructor-arg>
+	 </bean>
+	 -->
+	 <bean id="computer" class="com.myspring.demo.Computer">
+	 	<constructor-arg index="0" ref="upan"></constructor-arg>
+	 </bean>
+	 <bean id="upan" class="com.myspring.demo.Upan"></bean>
+	 <bean id="movepan" class="com.myspring.demo.MovePan"></bean>
+
+</beans>
